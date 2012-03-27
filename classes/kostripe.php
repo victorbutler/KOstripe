@@ -27,7 +27,7 @@ abstract class Kostripe {
 		if ( ! Kostripe::$_instance)
 		{
 			// Load stripe configuration, make sure minimum defaults are set
-			$config = Kohana::config('kostripe');	
+			$config = Kohana::$config->load('kostripe');
 
 			// Create the Stripe instance
 			Kostripe::$_instance = new Kostripe_Charge($config['environment'] == 'live' ? $config['live_key'] : $config['test_key']);
