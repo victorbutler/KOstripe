@@ -37,10 +37,16 @@ class Kostripe_Charge extends Kostripe {
 				array(':param' => 'Amount'));
 		}
 		
-		if ( ! isset($params['card']))
+		if ( ! isset($params['card']) && ! isset($params['customer']))
 		{
 			throw new Kohana_Exception('You must provide a :param parameter.',
-				array(':param' => 'Card'));
+				array(':param' => 'Card or Customer'));
+		}
+
+		if ( isset($params['card']) && isset($params['customer']))
+		{
+			throw new Kohana_Exception('You must provide only one :param parameter, not both.',
+				array(':param' => 'Card or Customer'));
 		}
 		
 		if ( ! isset($params['description']))
